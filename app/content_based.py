@@ -55,7 +55,7 @@ def output(l):
     data=search_general.data
     # Number of Results
     num_of_results = len(l)
-    st.subheader("Showing {} Research Paper".format(num_of_results))
+    st.subheader("Showing {}  / 175 Research Paper".format(num_of_results))
     # st.write(data)
         
 
@@ -91,7 +91,7 @@ def app():
         search_abstract = st.form_submit_button(label='Search in Abstract')    
         search_title = st.form_submit_button(label='Search by Title')
         search_author = st.form_submit_button(label='Search by Author')
-        search_date = st.form_submit_button(label='Search by Date')
+        # search_date = st.form_submit_button(label='Search by Date')
 
 
     search_general.import_data()
@@ -129,5 +129,6 @@ def app():
             st.write("Oops!! No match found ....") # pop up
         else:
             output(l)
-    elif search_date:
-        pass
+    # elif search_date:
+        # pass
+        # l

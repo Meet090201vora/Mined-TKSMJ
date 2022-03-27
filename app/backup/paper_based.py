@@ -2,9 +2,9 @@ import streamlit as st
 import search_general
 import streamlit.components.v1 as stc
 
-import new_user
+
 import pandas as pd
-import collaborative_filtering
+import paper_based_filtering
 m = st.markdown("""
 <style>
 div.stButton > button:first-child {
@@ -56,7 +56,7 @@ def output(l):
     data=pd.read_csv('rp_final.csv')
     # Number of Results
     num_of_results = len(l)
-    st.subheader("Showing {} / 175 Research Paper".format(num_of_results))
+    st.subheader("Showing {} Research Paper".format(num_of_results))
     # st.write(data)
         
 
@@ -82,39 +82,37 @@ def output(l):
 
 
 
+opt=[]
+
+for i in range(10):
+    opt.append(
+        'user_'+str(i)
+    )
 
 def app():
-    
-    temp=pd.read_csv('Rating.csv')
-    opt=[]
+    # st.write('in collab based')
+    # option=["Select one","Artificial Intelligence","Big Data","Computer Vision","Neural Networks"]
+    # search_field = st.selectbox("Select one",option)
+    # choice=['New User','Existing User']
+    # type_of_user=st.selectbox('Type of User',choice)
 
-    for i in range(temp.shape[1]):
-        opt.append('user_'+str(i))
+    # if type_of_user==choice[1]:
+    #     # print(opt)
+    with st.form(key='searchform'):
 
-    choice=['New User','Existing User']
-    type_of_user=st.selectbox('Type of User',choice)
-    if type_of_user==choice[1]:
-        # print(opt)
-        with st.form(key='searchform'):
+        user=st.selectbox('Enter User Id',opt)
+        # search_input = st.text_input("Search")
+        # date = st.date_input("Published After")#,datetime.date(2019, 7, 6))
+        search = st.form_submit_button(label='Search')    
 
-            user=st.selectbox('Enter User Id',opt)
-            search = st.form_submit_button(label='Search')    
-
-            id=int(user[5:])
-            # st.write(id)
-            if search:
-                output(collaborative_filtering.app(user,id))
-
-
-
-        #  NEw  USER      
-    elif type_of_user==choice[0]:
-        recommend_paper=new_user.app()
-        search = st.button(label='Search')    
-
-        # id=int(user[5:])
+        # search_abstract = st.form_submit_button(label='Search in Abstract')    
+        # search_title = st.form_submit_button(label='Search by Title')
+        # search_author = st.form_submit_button(label='Search by Author')
+        # search_date = st.form_submit_button(label='Search by Date')
+        id=int(user[5:])
         # st.write(id)
         if search:
-                output(recommend_paper)
-    else:
-        st.write('Invalid Input')
+            output(paper_based_filtering.app(user,id))
+        else: 
+            pass
+     

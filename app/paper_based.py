@@ -56,7 +56,7 @@ def output(l,user):
     data=pd.read_csv('rp_final.csv')
     # Number of Results
     num_of_results = len(l)
-    st.subheader("Showing {} Research Paper".format(num_of_results))
+    st.subheader("Showing {} / 175 Research Paper".format(num_of_results))
     # st.write(data)
         
 
